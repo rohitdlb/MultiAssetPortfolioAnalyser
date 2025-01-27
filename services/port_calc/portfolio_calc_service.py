@@ -7,7 +7,7 @@ from repository.db_ops import get_macro_factors_data, get_equity_indices_level_d
 from services.port_calc.port_returns import compute_portfolio_returns, decompose_portfolio_returns
 from services.port_calc.regression_model import run_regression
 from services.port_calc.rolling_calc import roll_level_macro_factors, roll_delta_macro_factors, get_correlation_matrix
-from utils.constants import INDICES_UNIVERSE, LEVEL_ONLY_MACROS, ALL_DELTA_MACROS, FACTOR
+from utils.constants import INDICES_UNIVERSE, LEVEL_ONLY_MACROS, ALL_DELTA_MACROS, FACTOR, PORT_HOLDING
 from utils.utils import get_dates
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,8 @@ def calculate_factor_holdings_and_correlations(allocations, analysis_date, rolli
     # Get Equity Indices Level Data
     allocation_df = pd.DataFrame(allocations)
     list_indices = allocation_df[FACTOR].values.tolist()
+    # Setting dtypes to avoid any errors due to type casting
+    allocation_df = allocation_df.astype({FACTOR: object, PORT_HOLDING: float})
     allocation_df.set_index(FACTOR, inplace=True)
     indices_df = get_equity_indices_level_data(list_indices, start_date, end_date)
 

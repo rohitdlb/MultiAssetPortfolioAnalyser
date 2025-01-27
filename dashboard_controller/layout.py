@@ -85,7 +85,7 @@ def create_layout():
                         'overflowX': 'auto'
                     }
                 ),
-            ], width='10')
+            ], width='15')
         ]),
         html.Br(),
         html.H2("Factor Correlations", className="text-center text-primary mb-4"),

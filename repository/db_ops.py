@@ -63,7 +63,7 @@ def create_macro_indices_table():
     conn.commit()
     logger.info('Macro (Level/Delta) Indices Table created successfully')
 
-
+# ORDER BY used to support rolling return calculations
 def get_equity_indices_data(list_indices, start_date, end_date):
     query = '''SELECT ticker AS factor, date, delta AS data FROM {} WHERE ticker IN {} AND DATE BETWEEN {} AND {} 
         ORDER BY ticker, date'''.format(EQUITY_INDEX_TABLE, tuple(list_indices), start_date, end_date)
@@ -84,7 +84,7 @@ def get_macro_factors_data(list_factors, start_date, end_date):
     query = '''SELECT a.macro_factor_tag AS factor, a.date,
        CASE WHEN b.type = 'delta' THEN delta ELSE level END data
     FROM macro_indices a LEFT JOIN factor_definition b ON a.macro_factor_tag = b.macro_factor_tag
-    WHERE a.date between {} and {} AND a.macro_factor_tag IN {}'''.format(start_date, end_date, tuple(list_factors))
+    WHERE a.date between {} and {} AND a.macro_factor_tag IN {} ORDER BY a.macro_factor_tag, a.date'''.format(start_date, end_date, tuple(list_factors))
     logger.info(f"Executing query: \n {query}")
     df_out = pd.read_sql_query(query, conn)
     return df_out

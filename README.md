@@ -4,6 +4,8 @@ Get source code from Git repository
 
 Use **PyCharm Professional** or any other IDE as convenient
 
+Make sure you have Python installed in your system - Python 3.10.4
+
 Inside the Project directory, run
 - For Windows:
 
@@ -49,8 +51,8 @@ Data has been collated for 7 indices namely:
 - MSCI_WRLD_GLOBAL (Global Index)
 
 Exceptions:
-- Russell 1000 data is missing for dates before 2008-12-01
-- MSCI_WRLD_GLOBAL data missing before 01-08-2004
+- Russell 1000 data missing for dates before 2008-12-01
+- MSCI_WRLD_GLOBAL data missing for dates before 01-08-2004
 
 
 ## About the Macro Input Data
@@ -88,14 +90,27 @@ Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2
   - **Utils** folder has common utilities and constant used across .py files
 
 
-## Modelling Factors for Portoflio Returns
+## Modelling Details
 - Train data uses 180 monthly observations
 - Due to insufficiency of train data, we are not doing train and test split. However, the same has been done during research separately
 - Fresh model is calibrated each time user sends inputs to the back-end from the **Dashboard**
 - Portfolio returns are computed for the rolling window provided by the user for each month - 
   - Given the user input (holding amounts for each constituent), no of units of each constituent are fixed across time to compute rolling returns
 - Independent variables are also rolled for the rolling window provided by the user
+- **SequentialFeatureSelector** is used to perform forward feature selection in a stepwise format
+- Factor correlations remain the same for a given date and rolling window and uses 180 observations to compute correlations.
+  - However, factor contributions and significant factor set can change on changing the holding composition of the portfolio even if the constituents remain same and rolling window remains same
+
+![img.png](img.png)
+
+The above image basically conveys the following:
+- F are observable factor returns
+- Factor betas essentially are factor holdings/exposures. Implying if we decrease the amount of portfolio constituents proportionately (eg- by factor of 2), then factor betas will also change by a factor of 2. This is displayed by the two images below:
+
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
+
 
 ## User Input on Dashboard
 - Analysis Date should be from 2018-2024 to allow 180 monthly observations during model training
-- 
