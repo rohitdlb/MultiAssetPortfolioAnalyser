@@ -4,7 +4,7 @@
 
 Get source code from Git repository
 
-Use PyCharm or any other IDE as convenient
+Use PyCharm Professional or any other IDE as convenient
 
 Inside the Project directory, run
 - For Windows:
