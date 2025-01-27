@@ -52,7 +52,7 @@ def compute_portfolio_returns(allocation_df, df_indices, rolling_window, run_dat
         for col in row.index:
             row[col] = row[col] * holding_units[col]
 
-    df_indices_returns.dropna(axis=0, how='all', inplace=True)
+    df_indices_returns.dropna(axis=0, inplace=True)  # TODO: removed how='all'
     df_indices_returns[PORT_DELTA] = df_indices_returns.sum(axis=1)
     return pd.DataFrame(df_indices_returns[PORT_DELTA])
 

@@ -35,6 +35,7 @@ Data has been sourced from multiple sources in web, namely:
 - https://fred.stlouisfed.org/categories/106
 - https://investing.com
 
+
 ## About the Indices Data
 All data ranges from Jan 1st, 2001 to Jan 1st, 2025 on monthly basis. 
 
@@ -49,6 +50,7 @@ Data has been collated for 7 indices namely:
 
 Exceptions:
 - Russell 1000 data is missing for dates before 2008-12-01
+- MSCI_WRLD_GLOBAL data missing before 01-08-2004
 
 
 ## About the Macro Input Data
@@ -65,11 +67,13 @@ Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2
 - US Debt Data available yearly as of 09/30 for each year (not used for analysis)
 - Bitcoin data available only since 2008 Aug 1st (not used for analysis)
 
+
 ## Database
 - The project uses **sqlite3** - a **relational database** which creates a local **relational database**.
 - On Application startup, the database is created and corresponding tables as required.
 - The Database is populated using a series of utility functions on server startup by itself.
 - Once done, database creation and data population would not be required on subsequent server startups
+
 
 ## Source Code Architecture
 - The web dashboard is a **Dash Application** (built on top of Flask)
@@ -82,3 +86,16 @@ Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2
   - **Services** (gets request from controller). Multiple services are created based on their functionalities
   - **Repository** -> responsible for DB operations
   - **Utils** folder has common utilities and constant used across .py files
+
+
+## Modelling Factors for Portoflio Returns
+- Train data uses 180 monthly observations
+- Due to insufficiency of train data, we are not doing train and test split. However, the same has been done during research separately
+- Fresh model is calibrated each time user sends inputs to the back-end from the **Dashboard**
+- Portfolio returns are computed for the rolling window provided by the user for each month - 
+  - Given the user input (holding amounts for each constituent), no of units of each constituent are fixed across time to compute rolling returns
+- Independent variables are also rolled for the rolling window provided by the user
+
+## User Input on Dashboard
+- Analysis Date should be from 2018-2024 to allow 180 monthly observations during model training
+- 

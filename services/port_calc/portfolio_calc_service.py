@@ -59,11 +59,18 @@ def calculate_factor_holdings_and_correlations(allocations, analysis_date, rolli
 
     # Merge all independent variables ; Drop rows where all are NaN
     independent_variables_df = delta_macro_data.merge(levels_macro_data, left_index=True, right_index=True)
-    independent_variables_df.dropna(axis=0, inplace=True)     # removed how='all'
+    independent_variables_df.dropna(axis=0, inplace=True)     # TODO: removed how='all'
 
-    # Run Regression here
+    # Check if train and target data have same observations before running regression
     logger.info(f'Shape of Train Data: {independent_variables_df.shape}')
     logger.info(f'Shape of Target Data: {port_returns.shape}')
+    diff_obs = independent_variables_df.shape[0] - port_returns.shape[0]
+    if diff_obs > 0:
+        independent_variables_df = independent_variables_df.iloc[diff_obs:, :]
+    if diff_obs < 0:
+        port_returns = port_returns.iloc[diff_obs:, :]
+
+    # Run Regression here
     coefficients, selected_features = run_regression(port_returns, independent_variables_df)
 
     # Get portfolio returns decomposition
