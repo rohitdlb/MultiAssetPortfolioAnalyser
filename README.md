@@ -4,7 +4,7 @@
 
 Get source code from Git repository
 
-Use PyCharm Professional or any other IDE as convenient
+Use **PyCharm Professional** or any other IDE as convenient
 
 Inside the Project directory, run
 - For Windows:
@@ -55,11 +55,11 @@ Exceptions:
 
 ## About the Macro Input Data
 
-All data ranges from Jan 1st, 2001 to Jan 1st, 2025 on monthly basis. 
+All data ranges **from Jan 1st, 2001 to Jan 1st, 2025** on **monthly basis.** 
 Data is available as of 1st day of the month for entire period
 Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2001 is only used
 
-Exceptions:
+**Exceptions:**
 - US CPI Data available on and before Dec 1st, 2024
 - US Effective FED Rates Data available on and before Dec 1st, 2024
 - US Employment Data available on and before Dec 1st, 2024
@@ -67,3 +67,19 @@ Exceptions:
 - US Debt Data available yearly as of 09/30 for each year (not used for analysis)
 - Bitcoin data available only since 2008 Aug 1st (not used for analysis)
 
+## Database
+- The project uses **sqlite3** - a **relational database** which creates a local **relational database**.
+- On Application startup, the database is created and corresponding tables as required.
+- The Database is populated using a series of utility functions on server startup by itself.
+- Once done, database creation and data population would not be required on subsequent server startups
+
+## Source Code Architecture
+- The web dashboard is a **Dash Application** (built on top of Flask)
+- On interaction with web dashboard, callbacks are sent to the backend.
+- Code is structured in a modular manner to enable ease and reusability.
+- Documentation (**Python docstring**) has been added for important functions
+- Code is structured in the following manner:
+  - Front-end dashboard (layout)
+  - **Controller** (callbacks)
+  - **Services** (gets request from controller). Multiple services are created based on their functionalities
+  - **Repository** -> responsible for DB operations
