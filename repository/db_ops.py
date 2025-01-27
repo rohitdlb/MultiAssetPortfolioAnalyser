@@ -14,6 +14,7 @@ logger.addHandler(logging.StreamHandler())
 db_file = 'file:{}/repository/{}.sqlite3'.format(os.getcwd(), MY_DATABASE)
 conn = sqlite3.connect(db_file, check_same_thread=False, uri=True)
 
+
 def write_data_to_db(data, table_name):
     data.to_sql(table_name, con=conn, index=False, if_exists='append')
 
@@ -25,6 +26,7 @@ def check_if_tables_already_exist():
     if len(list_of_tables) == 0:
         return False
     return True
+
 
 def create_equity_indices_table():
     cursor = conn.cursor()
@@ -65,12 +67,15 @@ def create_macro_indices_table():
 def get_equity_indices_data(list_indices, start_date, end_date):
     query = '''SELECT ticker AS factor, date, delta AS data FROM {} WHERE ticker IN {} AND DATE BETWEEN {} AND {} 
         ORDER BY ticker, date'''.format(EQUITY_INDEX_TABLE, tuple(list_indices), start_date, end_date)
+    logger.info(f"Executing query: \n {query}")
     df_out = pd.read_sql_query(query, conn)
     return df_out
+
 
 def get_equity_indices_level_data(list_indices, start_date, end_date):
     query = '''SELECT ticker AS factor, date, level AS data FROM {} WHERE ticker IN {} AND DATE BETWEEN {} AND {} 
         ORDER BY ticker, date'''.format(EQUITY_INDEX_TABLE, tuple(list_indices), start_date, end_date)
+    logger.info(f"Executing query: \n {query}")
     df_out = pd.read_sql_query(query, conn)
     return df_out
 
@@ -80,5 +85,6 @@ def get_macro_factors_data(list_factors, start_date, end_date):
        CASE WHEN b.type = 'delta' THEN delta ELSE level END data
     FROM macro_indices a LEFT JOIN factor_definition b ON a.macro_factor_tag = b.macro_factor_tag
     WHERE a.date between {} and {} AND a.macro_factor_tag IN {}'''.format(start_date, end_date, tuple(list_factors))
+    logger.info(f"Executing query: \n {query}")
     df_out = pd.read_sql_query(query, conn)
     return df_out

@@ -27,7 +27,7 @@ def calculate_factor_holdings_and_correlations(allocations, analysis_date, rolli
     :return: factor_contributions_df, rolling_correlations_df
     """
 
-    logger.info(f'Received request from dashboard callback for analysis date: {analysis_date}, rolling window: {rolling_window} and allocations: {allocations}')
+    logger.info(f'Received request from dashboard callback for analysis date: {analysis_date}; rolling window: {rolling_window} and allocations: {allocations}')
     # Get required dates for computation
     start_date, end_date = get_dates(analysis_date, no_observations_regression, rolling_window)
 
