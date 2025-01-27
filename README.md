@@ -11,13 +11,13 @@ Inside the Project directory, run
 
 ```bash 
 pip install -r requirements.txt 
-- ```
+```
 
 - For Mac: 
 
 ```bash 
 pip3 install -r requirements.txt 
-- ```
+```
 
 Run app.py via the IDE (no parameters required or environment variables )
 
