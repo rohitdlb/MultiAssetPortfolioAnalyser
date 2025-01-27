@@ -1,5 +1,3 @@
-# Instructions to run the Application
-
 ## Installation
 
 Get source code from Git repository
