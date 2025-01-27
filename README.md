@@ -7,11 +7,14 @@ Get source code from Git repository
 Use PyCharm or any other IDE as convenient
 
 Inside the Project directory, run
-- For Windows: 
+- For Windows:
+
 ```bash 
-- pip install -r requirements.txt 
+pip install -r requirements.txt 
 - ```
+
 - For Mac: 
+
 ```bash 
 pip3 install -r requirements.txt 
 - ```
