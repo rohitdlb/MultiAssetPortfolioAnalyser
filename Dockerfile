@@ -1,16 +1,17 @@
 FROM python:3
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /code
-WORKDIR /code
+RUN mkdir /app
+WORKDIR /app
 
 ## Uncomment if using requirements.txt
-COPY requirements.txt /code/
+COPY requirements.txt /app/
 RUN pip3 install -r requirements.txt
 
-COPY . /code/
+COPY . /app/
+
+ENV FLASK_APP=app
+EXPOSE 5000
 
 # configure the container to run in an executed manner
-ENTRYPOINT [ "python" ]
-
-CMD ["app.py" ]
+CMD ["python" , "app.py" ]
