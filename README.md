@@ -81,3 +81,4 @@ Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2
   - **Controller** (callbacks)
   - **Services** (gets request from controller). Multiple services are created based on their functionalities
   - **Repository** -> responsible for DB operations
+  - **Utils** folder has common utilities and constant used across .py files

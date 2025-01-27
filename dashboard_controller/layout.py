@@ -2,10 +2,10 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from dash import dcc, dash_table, html
 
-from utils.constants import INDICES_UNIVERSE
+from utils.constants import INDICES_UNIVERSE, FACTOR, PORT_HOLDING
 
-default_port = pd.DataFrame({'factor': INDICES_UNIVERSE,
-                             'port_holding': [10000, 20000, 30000, 40000, 50000, 60000]})
+default_port = pd.DataFrame({FACTOR: INDICES_UNIVERSE,
+                             PORT_HOLDING: [10000, 20000, 30000, 40000, 50000, 60000]})
 
 def create_layout():
     return dbc.Container([
@@ -17,17 +17,17 @@ def create_layout():
                 dash_table.DataTable(
                     id='port-alloc-table',
                     columns=(
-                        [{'id': 'factor', 'name': 'Portfolio Constituents', 'presentation': 'dropdown'},  # need a dropdown here
-                         {'id': 'port_holding', 'name': 'Holding Amount'}]
+                        [{'id': FACTOR, 'name': 'Portfolio Constituents', 'presentation': 'dropdown'},  # need a dropdown here
+                         {'id': PORT_HOLDING, 'name': 'Holding Amount'}]
                     ),
                     data=default_port.to_dict('records'),
                     editable=True,
                     row_deletable=True,
                     dropdown={
-                        'factor': {
+                        FACTOR: {
                             'options': [
                                 {'label': i, 'value': i}
-                                for i in default_port['factor'].unique()
+                                for i in default_port[FACTOR].unique()
                             ]
                         }
                     },

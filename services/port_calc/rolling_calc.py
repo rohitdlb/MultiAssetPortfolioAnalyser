@@ -13,6 +13,11 @@ def roll_level_macro_factors(levels_macro_data, rolling_window):
 
 
 def rolling_func_for_ratio_factors(data):
+    """
+    Creates rolling returns for ratio factors
+    :param data:
+    :return:
+    """
     out = 1
     for item in data:
         out = out*(1 + item)

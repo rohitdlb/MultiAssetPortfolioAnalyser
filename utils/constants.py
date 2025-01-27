@@ -10,6 +10,10 @@ DELTA_FACTOR = 'delta'
 LEVEL_FACTOR = 'level'
 
 
+# LAYOUT Related
+FACTOR = 'factor'
+PORT_HOLDING = 'port_holding'
+
 # MACRO CONST
 US_FED_RATES = 'US_FED_RATES'
 US_UNEMPLOYMENT = 'US_UNEMPLOYMENT'
