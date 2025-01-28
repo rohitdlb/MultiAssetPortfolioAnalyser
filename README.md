@@ -105,7 +105,7 @@ Data for CPI, US_DEBT, US_DEBT, US_GDP start from 1950s onwards, but data from 2
 
 The above image basically conveys the following:
 - F are observable factor returns
-- Factor betas essentially are factor holdings/exposures. Implying if we decrease the amount of portfolio constituents proportionately (eg- by factor of 2), then factor betas will also change by a factor of 2. This is displayed by the two images below:
+- Factor betas essentially are factor holdings/exposures. Implying if we increase/decrease the amount of portfolio constituents proportionately (eg- by factor of 2), then factor betas will also change by a factor of 2. This is displayed by the two images below:
 
 ![img_1.png](img_1.png)
 
